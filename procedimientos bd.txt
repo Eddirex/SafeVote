@@ -1,0 +1,54 @@
+-cree procedimientos en workbench
+
+--select persona
+delimiter $$
+create procedure cg_persona()
+begin
+select rut,nombre_p,appaterno,apmaterno,fecha_nacimiento,n_documento,id_sexo,id_comuna
+from 
+PERSONA;
+end$$
+delimiter $$
+
+call cg_persona() --con este se llama
+
+--select a una sola persona
+delimiter $$
+create procedure cp_persona(in p_rut int)
+begin
+select rut,nombre_p,appaterno,apmaterno,fecha_nacimiento,n_documento,id_sexo,id_comuna
+from 
+PERSONA
+where
+rut = p_rut;
+end$$
+delimiter $$
+
+call cp_persona(129874562) --con este se llama el () es para indicar el rut
+
+--select persona con join sexo y comuna
+delimiter $$
+create procedure cp_persona_todo()
+begin
+select 
+PERSONA.rut,
+PERSONA.nombre_p,
+PERSONA.appaterno,
+PERSONA.apmaterno,
+PERSONA.fecha_nacimiento,
+PERSONA.n_documento,
+SEXO.tipo_sexo,
+COMUNA.nombre_comuna
+from 
+PERSONA,
+SEXO,
+COMUNA
+where
+PERSONA.id_sexo = SEXO.id_sexo
+and
+PERSONA.id_comuna = COMUNA.id_comuna;
+end$$
+delimiter $$
+
+call cp_persona_todo --CON ESTE SE LLAMA
+

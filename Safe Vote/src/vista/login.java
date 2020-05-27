@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package vista;
+import controlador.controlador;
+import javax.swing.JOptionPane;
+import modelo.persona;
 
 /**
  *
@@ -61,6 +64,11 @@ public class login extends javax.swing.JFrame {
         jButton1.setText("?");
 
         jButton2.setText("Entrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,10 +123,30 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    int rut;
     private void txt_n_documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_n_documentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_n_documentoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        controlador crt = new controlador();
+        persona p = crt.buscarPersona(Integer.parseInt(txtrut.getText().toString()));  ;
+      
+        if (Integer.parseInt(txtrut.getText().toString()) == p.getRut() ){
+            if(Integer.parseInt(txt_n_documento.getText().toString()) == p.getNum_documento()){
+                sel_votacion Ag = new sel_votacion();
+                Ag.setVisible(true);
+                }
+            else{
+                JOptionPane.showMessageDialog(null,"Error con el numero de documento");}
+             }
+        else{JOptionPane.showMessageDialog(null,"Error con el rut");}
+
+                
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

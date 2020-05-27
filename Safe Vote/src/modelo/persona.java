@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author Eddie
@@ -14,7 +16,7 @@ public class persona {
     private String nombre_p;
     private String appaterno;
     private String apmaterno;
-    private String fecha_nacimiento;
+    private Date fecha_nacimiento;
     private int num_documento;
     private String sexo;
     private String comuna;
@@ -22,7 +24,7 @@ public class persona {
     public persona() {
     }
 
-    public persona(int rut, String nombre_p, String appaterno, String apmaterno, String fecha_nacimiento, int num_documento, String sexo, String comuna) {
+    public persona(int rut, String nombre_p, String appaterno, String apmaterno, Date fecha_nacimiento, int num_documento, String sexo, String comuna) {
         this.rut = rut;
         this.nombre_p = nombre_p;
         this.appaterno = appaterno;
@@ -65,11 +67,11 @@ public class persona {
         this.apmaterno = apmaterno;
     }
 
-    public String getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(String fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -97,11 +99,12 @@ public class persona {
         this.comuna = comuna;
     }
 
-
     @Override
     public String toString() {
         return "persona{" + "rut=" + rut + ", nombre_p=" + nombre_p + ", appaterno=" + appaterno + ", apmaterno=" + apmaterno + ", fecha_nacimiento=" + fecha_nacimiento + ", num_documento=" + num_documento + ", sexo=" + sexo + ", comuna=" + comuna + '}';
     }
+
+
     
     
 

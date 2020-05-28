@@ -123,7 +123,7 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    int rut;
+
     private void txt_n_documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_n_documentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_n_documentoActionPerformed

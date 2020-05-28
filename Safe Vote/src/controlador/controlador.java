@@ -7,9 +7,11 @@ package controlador;
 
 import bd.conexion;
 import modelo.persona;
+import modelo.votacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -74,7 +76,99 @@ public class controlador {
     
         return p;
 }
+        public ArrayList<votacion>buscarVotacion(){
+        ArrayList lista = new ArrayList<>();    
+        votacion v = null;
+        int urna;
+        String opcion;
+        urna = 1;
+        opcion = "null";
+        
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_nombre_votacion()"
+                    );
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                v = new votacion(
+                        
+
+                rs.getString(1),
+                opcion,
+                urna          
+                );
+                
+            lista.add(v);
+   
+            }
+        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+        
+    
+    
+    }
+         return lista;
+
+    
 }
+        
+        public ArrayList buscarOpcion(String nombre_votacion){
+        ArrayList lista = new ArrayList<>();    
+        votacion o = null;
+        String nombre;
+        nombre = ("'"+nombre_votacion+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "sql_votacion_todo_ser_nombre("+nombre+")"
+            //si colocas call sql_votacion_todo_ser_nombre('Presidencial 2020') FUNCIONA
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                o = new votacion(
+
+                rs.getString(2),
+                rs.getString(3),
+                rs.getInt(1)          
+                );
+                
+            lista.add(o);
+   
+            }
+        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+        
+    
+    
+    }
+         return lista;
+
+    
+}
+}
+
+
   
         
     

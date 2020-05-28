@@ -5,19 +5,32 @@
  */
 package modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author Eddie
  */
-public class voto {
+public class votacion {
+    private String nombre_votacion;
     private String opcion_voto;
-    private String fecha;
     private int urna;
 
-    public voto(String opcion_voto, String fecha, int urna) {
+    public votacion() {
+    }
+
+    public votacion(String nombre_votacion, String opcion_voto, int urna) {
+        this.nombre_votacion = nombre_votacion;
         this.opcion_voto = opcion_voto;
-        this.fecha = fecha;
         this.urna = urna;
+    }
+
+    public String getNombre_votacion() {
+        return nombre_votacion;
+    }
+
+    public void setNombre_votacion(String nombre_votacion) {
+        this.nombre_votacion = nombre_votacion;
     }
 
     public String getOpcion_voto() {
@@ -28,13 +41,6 @@ public class voto {
         this.opcion_voto = opcion_voto;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 
     public int getUrna() {
         return urna;
@@ -43,6 +49,8 @@ public class voto {
     public void setUrna(int urna) {
         this.urna = urna;
     }
+
+    
     
 }
 

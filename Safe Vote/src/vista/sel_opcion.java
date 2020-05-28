@@ -9,24 +9,21 @@ import controlador.controlador;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.votacion;
-import modelo.persona;
-import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author jesuo
  */
-public class sel_votacion extends javax.swing.JFrame {
+public class sel_opcion extends javax.swing.JFrame {
+    String nombre_votacion;
     controlador crt = new controlador();
 
     /**
      * Creates new form admin
      */
-    public sel_votacion() {
+    public sel_opcion() {
         initComponents();
         llenarTabla();
-        
     }
 
     /**
@@ -41,8 +38,7 @@ public class sel_votacion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblvotacion = new javax.swing.JTable();
-        jaceptar = new javax.swing.JButton();
+        tblopcion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +47,7 @@ public class sel_votacion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Votación");
 
-        tblvotacion.setModel(new javax.swing.table.DefaultTableModel(
+        tblopcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,14 +58,7 @@ public class sel_votacion extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblvotacion);
-
-        jaceptar.setText("aceptar");
-        jaceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jaceptarActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tblopcion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,13 +69,8 @@ public class sel_votacion extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(379, 379, 379))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
-                        .addComponent(jaceptar)))
+                .addGap(237, 237, 237)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,11 +78,9 @@ public class sel_votacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+                .addGap(89, 89, 89)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(jaceptar)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,52 +97,65 @@ public class sel_votacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaceptarActionPerformed
-        // TODO add your handling code here:
-        int row = tblvotacion.getSelectedRow();
-        if(row >=0){
-        int opc = JOptionPane.showConfirmDialog(this,"Seguro quiere acceder a esta votacion","Pregunta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if(opc==JOptionPane.YES_OPTION){
-             DefaultTableModel modelotabla=(DefaultTableModel) tblvotacion.getModel();
-             votacion v = null;
-             sel_opcion ventana = new sel_opcion();
-             ventana.setVisible(true);
-             ventana.nombre_votacion=(String)modelotabla.getValueAt(row, 0);
-             
-        }else{
-            JOptionPane.showMessageDialog(this,"Seleccione Fila");
-            
-     
-        }
-        }    
-    }//GEN-LAST:event_jaceptarActionPerformed
-
     /**
      * @param args the command line arguments
      */
 public void llenarTabla(){
-    ArrayList<votacion> lista = crt.buscarVotacion();
+    ArrayList<votacion> lista = crt.buscarOpcion(nombre_votacion);
     
     DefaultTableModel modelo = new DefaultTableModel();
-    this.tblvotacion.setModel(modelo);
-    modelo.addColumn("Elija la Votacion");
+    this.tblopcion.setModel(modelo);
+    modelo.addColumn("Elija la Opcion");
 
     
     Object[] col = new Object[1];
     
     for(votacion tmp : lista){
-        col[0] = tmp.getNombre_votacion();
+        col[0] = tmp.getOpcion_voto();
         
         modelo.addRow(col);
          
     }
-    
 }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(sel_opcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(sel_opcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(sel_opcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(sel_opcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new sel_opcion().setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jaceptar;
-    private javax.swing.JTable tblvotacion;
+    private javax.swing.JTable tblopcion;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,3 +52,52 @@ delimiter $$
 
 call cp_persona_todo --CON ESTE SE LLAMA
 
+
+-- busqueda por rut
+delimiter $$
+create procedure sql_select_per_all_bus(in p_rut int)
+begin
+select 
+PERSONA.rut,
+PERSONA.nombre_p,
+PERSONA.appaterno,
+PERSONA.apmaterno,
+PERSONA.fecha_nacimiento,
+PERSONA.n_documento,
+SEXO.tipo_sexo,
+COMUNA.nombre_comuna
+from 
+PERSONA,
+SEXO,
+COMUNA
+where
+PERSONA.id_sexo = SEXO.id_sexo
+and
+PERSONA.id_comuna = COMUNA.id_comuna
+and
+rut = p_rut;
+end$$
+delimiter $$
+
+-- call sql_select_per_all_bus(129874562) 
+
+-- para buscar las votaciones y sus opciones
+delimiter $$
+create procedure sql_votacion_todo()
+begin
+select 
+votacion.id_votacion,
+nombre_votacion.nombre_votacion,
+opcion_voto.nombre_opcion
+from 
+votacion,
+nombre_votacion,
+opcion_voto
+where
+votacion.id_nombre_votacion = nombre_votacion.id_nombre_votacion
+and
+votacion.id_opcion = opcion_voto.id_opcion;
+end$$
+delimiter $$
+
+call sql_votacion_todo()

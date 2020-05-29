@@ -7,6 +7,8 @@ package vista;
 import controlador.controlador;
 import javax.swing.JOptionPane;
 import modelo.persona;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -62,6 +64,11 @@ public class login extends javax.swing.JFrame {
         });
 
         jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Entrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +154,12 @@ public class login extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Icon n;
+        n = new ImageIcon(getClass().getResource("/img/ndoc.PNG"));
+        JOptionPane.showMessageDialog(null,"","Numero de Documento",JOptionPane.INFORMATION_MESSAGE,n);        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

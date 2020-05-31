@@ -138,12 +138,14 @@ public class login extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         controlador crt = new controlador();
-        persona p = crt.buscarPersona(Integer.parseInt(txtrut.getText().toString()));  ;
+        persona p = crt.buscarPersona(Integer.parseInt(txtrut.getText().toString()));
+        int rut;
       
         if (Integer.parseInt(txtrut.getText().toString()) == p.getRut() ){
             if(Integer.parseInt(txt_n_documento.getText().toString()) == p.getNum_documento()){
                 sel_votacion Ag = new sel_votacion();
                 Ag.setVisible(true);
+                Ag.rut=(Integer.parseInt(txtrut.getText().toString()));
                 }
             else{
                 JOptionPane.showMessageDialog(null,"Error con el numero de documento");}

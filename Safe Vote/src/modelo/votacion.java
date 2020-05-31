@@ -12,17 +12,25 @@ import java.sql.Date;
  * @author Eddie
  */
 public class votacion {
+    private int id_opcion;
     private String nombre_votacion;
     private String opcion_voto;
-    private int urna;
 
     public votacion() {
     }
 
-    public votacion(String nombre_votacion, String opcion_voto, int urna) {
+    public votacion(int id_opcion, String nombre_votacion, String opcion_voto) {
+        this.id_opcion = id_opcion;
         this.nombre_votacion = nombre_votacion;
         this.opcion_voto = opcion_voto;
-        this.urna = urna;
+    }
+
+    public int getId_opcion() {
+        return id_opcion;
+    }
+
+    public void setId_opcion(int id_opcion) {
+        this.id_opcion = id_opcion;
     }
 
     public String getNombre_votacion() {
@@ -41,14 +49,7 @@ public class votacion {
         this.opcion_voto = opcion_voto;
     }
 
-
-    public int getUrna() {
-        return urna;
-    }
-
-    public void setUrna(int urna) {
-        this.urna = urna;
-    }
+    
 
     
     

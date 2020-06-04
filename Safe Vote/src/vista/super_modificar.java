@@ -213,6 +213,7 @@ public class super_modificar extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(super_modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

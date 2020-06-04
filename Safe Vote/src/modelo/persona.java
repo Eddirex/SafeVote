@@ -6,6 +6,9 @@
 package modelo;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -114,5 +117,28 @@ public class persona {
     public static void main(String[] args) {
         // TODO code application logic here
     }
+    
+    public int ExtraerEdad(){
+            ResultSet rs;
+            PreparedStatement stm = null;
+            int edad = 0;
+
+            
+            try {
+                rs = stm.executeQuery("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fecha_nacimiento)), '%Y')+0 AS EDAD FROM Safe_Vote.PERSONA WHERE rut = "+rut+";");
+                
+                while (rs.next()) {
+                    edad = rs.getInt(1);
+                }
+            }
+              catch(SQLException e){
+                System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+            } catch (Exception e) {
+                System.out.println("Error general"+e.getMessage());
+            }
+         return edad;
+            
+        }
     
 }

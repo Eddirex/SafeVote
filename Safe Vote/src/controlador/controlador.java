@@ -13,8 +13,9 @@ import modelo.votacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -84,9 +85,9 @@ public class controlador {
         public ArrayList<votacion>buscarVotacion(){
         ArrayList lista = new ArrayList<>();    
         votacion v = null;
-        int urna;
+        int id_opc;
         String opcion;
-        urna = 1;
+        id_opc = 1;
         opcion = "null";
         
         try{
@@ -99,9 +100,9 @@ public class controlador {
                 v = new votacion(
                         
 
+                id_opc, 
                 rs.getString(1),
-                opcion,
-                urna          
+                opcion         
                 );
                 
             lista.add(v);
@@ -136,16 +137,16 @@ public class controlador {
         try{
             PreparedStatement pstm = this.getConexion().obtenerConexion()
                     .prepareStatement(
-                    "sql_votacion_todo_ser_nombre("+nombre+")"
-            //si colocas call sql_votacion_todo_ser_nombre('Presidencial 2020') FUNCIONA
+                    "call sql_votacion_todo_ser_nombre("+nombre+")"
+
                     );           
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 o = new votacion(
-
+                        
+                rs.getInt(1), 
                 rs.getString(2),
-                rs.getString(3),
-                rs.getInt(1)          
+                rs.getString(3)         
                 );
                 
             lista.add(o);
@@ -171,6 +172,77 @@ public class controlador {
 
     
 }
+    public void GuardarVoto(int opc_voto,int p_urna,String fecha,int p_rut){
+        
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_insert_voto("+opc_voto+","+p_urna+",'"+fecha+"',"+p_rut+")"
+                    );
+            ResultSet rs = pstm.executeQuery();
+
+        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+        
+    
+    
+    }
+    
+
+}
+        public votacion buscarOpc(String nombre_opcion){    
+        votacion v = null;
+        String nombre;
+        String opcion;
+        opcion = "null";
+        nombre = ("'"+nombre_opcion+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_votacion_opc_nomb("+nombre+")"
+
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                v = new votacion(
+                        
+                rs.getInt(1), 
+                opcion,
+                rs.getString(2)         
+                );
+                
+   
+            }
+        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+        
+    
+    
+    }
+         return v;
+        }
+
+
 
     public DefaultTableModel buscarPersonas(String buscar) throws ClassNotFoundException
     {
@@ -331,33 +403,7 @@ public class controlador {
     
     }
     
-    public int ValidarEdad(){
-            ResultSet rs;
-            PreparedStatement stm = null;
-            int edad = 0;
-
-            
-            try {
-                rs = stm.executeQuery("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fecha_nacimiento)), '%Y')+"
-                    + "0 AS EDAD FROM Safe_Vote.PERSONA WHERE RUT = "+rut+";");
-                
-                while (rs.next()) {
-                    edad = rs.getInt(1);
-                }
-            }
-              catch(SQLException e){
-                System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
-    
-            } catch (Exception e) {
-                System.out.println("Error general"+e.getMessage());
-            }
-         return edad;
-            
-        }
-    
 }
-
-
 
 
   

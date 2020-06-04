@@ -7,8 +7,13 @@ package vista;
 
 import controlador.controlador;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.votacion;
+import vista.sel_votacion;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -17,13 +22,16 @@ import modelo.votacion;
 public class sel_opcion extends javax.swing.JFrame {
     String nombre_votacion;
     controlador crt = new controlador();
+    int rut;
 
     /**
      * Creates new form admin
      */
     public sel_opcion() {
         initComponents();
-        llenarTabla();
+
+        
+        
     }
 
     /**
@@ -39,6 +47,7 @@ public class sel_opcion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblopcion = new javax.swing.JTable();
+        jbAccept = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,34 +66,32 @@ public class sel_opcion extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        ));
+        jScrollPane1.setViewportView(tblopcion);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        jbAccept.setText("Aceptar");
+        jbAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAcceptActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblopcion);
-        if (tblopcion.getColumnModel().getColumnCount() > 0) {
-            tblopcion.getColumnModel().getColumn(0).setResizable(false);
-            tblopcion.getColumnModel().getColumn(1).setResizable(false);
-            tblopcion.getColumnModel().getColumn(2).setResizable(false);
-            tblopcion.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(378, 378, 378)
+                .addGap(396, 396, 396)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(379, 379, 379))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(385, 385, 385)
+                        .addComponent(jbAccept))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,7 +101,9 @@ public class sel_opcion extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(89, 89, 89)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addComponent(jbAccept)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,23 +120,53 @@ public class sel_opcion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcceptActionPerformed
+        // TODO add your handling code here:
+        String id_voto;
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha;
+        fecha = dateFormat.format(date);
+
+        int row = tblopcion.getSelectedRow();
+        if(row >=0){
+        int opc = JOptionPane.showConfirmDialog(this,"¿Esta seguro de su eleccion?","Pregunta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(opc==JOptionPane.YES_OPTION){
+            DefaultTableModel modelotabla=(DefaultTableModel) tblopcion.getModel();
+                    controlador crt = new controlador();
+            votacion v = crt.buscarOpc((String)modelotabla.getValueAt(row, 0));
+            JOptionPane.showMessageDialog(this,"call sql_insert_voto("+v.getId_opcion()+","+1+","+fecha+","+rut+")");
+
+            
+            crt.GuardarVoto(v.getId_opcion(),1,fecha,rut);
+
+             
+        }else{
+            JOptionPane.showMessageDialog(this,"Seleccione Fila");
+        }
+        }
+    }//GEN-LAST:event_jbAcceptActionPerformed
+
     /**
      * @param args the command line arguments
      */
-public void llenarTabla(){
-    ArrayList<votacion> lista = crt.buscarOpcion(nombre_votacion);
+public void llenarTabla(String nombre){
+    ArrayList<votacion> lista = crt.buscarOpcion(nombre);
     
     DefaultTableModel modelo = new DefaultTableModel();
     this.tblopcion.setModel(modelo);
-    modelo.addColumn("Elija la Opcion");
+    modelo.addColumn("Eliga su opcion");
 
     
-    Object[] col = new Object[1];
+    Object[] col = new Object[2];
     
     for(votacion tmp : lista){
         col[0] = tmp.getOpcion_voto();
         
+        
         modelo.addRow(col);
+         
+    
          
     }
 }
@@ -170,6 +209,7 @@ public void llenarTabla(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAccept;
     private javax.swing.JTable tblopcion;
     // End of variables declaration//GEN-END:variables
 }

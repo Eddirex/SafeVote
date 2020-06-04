@@ -55,6 +55,12 @@ public class login extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese Rut");
 
+        txtrut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtrutActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Ingrese N° de documento");
 
         txt_n_documento.addActionListener(new java.awt.event.ActionListener() {
@@ -137,22 +143,30 @@ public class login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        
+        
         controlador crt = new controlador();
         persona p = crt.buscarPersona(Integer.parseInt(txtrut.getText().toString()));
-        int rut;
+      
+
       
         if (Integer.parseInt(txtrut.getText().toString()) == p.getRut() ){
             if(Integer.parseInt(txt_n_documento.getText().toString()) == p.getNum_documento()){
                 sel_votacion Ag = new sel_votacion();
                 Ag.setVisible(true);
-                Ag.rut=(Integer.parseInt(txtrut.getText().toString()));
+                
+               
                 }
             else{
                 JOptionPane.showMessageDialog(null,"Error con el numero de documento");}
+            if(crt.ValidarEdad()<=18){
+                JOptionPane.showMessageDialog(null, "No puede votar.");
+            }
              }
         else{JOptionPane.showMessageDialog(null,"Error con el rut");}
 
-                
+    
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -162,6 +176,10 @@ public class login extends javax.swing.JFrame {
         n = new ImageIcon(getClass().getResource("/img/ndoc.PNG"));
         JOptionPane.showMessageDialog(null,"","Numero de Documento",JOptionPane.INFORMATION_MESSAGE,n);        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtrutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrutActionPerformed
 
     /**
      * @param args the command line arguments

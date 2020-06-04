@@ -17,7 +17,7 @@ import java.sql.SQLException;
       private static conexion conexion;
       private Connection cone;
 
-      private conexion() {
+      public conexion() {
       }
    
     public static conexion nuevaInstancia(){

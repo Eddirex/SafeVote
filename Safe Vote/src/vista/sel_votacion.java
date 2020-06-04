@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
  */
 public class sel_votacion extends javax.swing.JFrame {
     controlador crt = new controlador();
-    int rut;
 
     /**
      * Creates new form admin
@@ -62,7 +61,15 @@ public class sel_votacion extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblvotacion);
 
         jaceptar.setText("aceptar");
@@ -124,12 +131,10 @@ public class sel_votacion extends javax.swing.JFrame {
         if(opc==JOptionPane.YES_OPTION){
              DefaultTableModel modelotabla=(DefaultTableModel) tblvotacion.getModel();
              votacion v = null;
-             sel_opcion s = new sel_opcion();
-             s.setVisible(true);
-             s.nombre_votacion=(String)modelotabla.getValueAt(row, 0);
-             s.llenarTabla((String)modelotabla.getValueAt(row, 0));
-             s.rut=rut;
-            
+             sel_opcion ventana = new sel_opcion();
+             ventana.setVisible(true);
+             ventana.nombre_votacion=(String)modelotabla.getValueAt(row, 0);
+             
         }else{
             JOptionPane.showMessageDialog(this,"Seleccione Fila");
             
@@ -164,6 +169,6 @@ public void llenarTabla(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jaceptar;
-    public static javax.swing.JTable tblvotacion;
+    private javax.swing.JTable tblvotacion;
     // End of variables declaration//GEN-END:variables
 }

@@ -82,7 +82,7 @@ public class controlador {
     
         return p;
 }
-        public ArrayList<votacion>buscarVotacion(){
+    public ArrayList<votacion>buscarVotacion(){
         ArrayList lista = new ArrayList<>();    
         votacion v = null;
         int id_opc;
@@ -129,7 +129,7 @@ public class controlador {
     
 }
         
-        public ArrayList buscarOpcion(String nombre_votacion){
+    public ArrayList buscarOpcion(String nombre_votacion){
         ArrayList lista = new ArrayList<>();    
         votacion o = null;
         String nombre;
@@ -200,7 +200,7 @@ public class controlador {
     
 
 }
-        public votacion buscarOpc(String nombre_opcion){    
+    public votacion buscarOpc(String nombre_opcion){    
         votacion v = null;
         String nombre;
         String opcion;
@@ -403,6 +403,49 @@ public class controlador {
     
     }
     
+        public ArrayList Grafico(String nombre_votacion){
+        ArrayList lista = new ArrayList<>();    
+        votacion g = null;
+        String nombre;
+        nombre = ("'"+nombre_votacion+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_cantidad_sexo("+nombre+")"
+
+
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new votacion(
+                        
+                rs.getInt(2), 
+                rs.getString(1),
+                rs.getString(3)         
+                );
+                
+            lista.add(g);
+   
+            }
+        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+        
+    
+    
+    }
+         return lista;
+    
+}
 }
 
 

@@ -145,14 +145,14 @@ public class login extends javax.swing.JFrame {
       
         if (Integer.parseInt(txtrut.getText().toString()) == p.getRut() ){
             if(Integer.parseInt(txt_n_documento.getText().toString()) == p.getNum_documento()){
-                if(p.ExtraerEdad()>=18){
+                //if(p.ExtraerEdad()>=18){
                     sel_votacion Ag = new sel_votacion();
                     Ag.setVisible(true);
-                }
+                //}
                 
-                else{
-                    JOptionPane.showMessageDialog(null, "No puede votar.");}
-                    JOptionPane.showMessageDialog(null, p.ExtraerEdad());
+               // else{
+                   // JOptionPane.showMessageDialog(null, "No puede votar.");}
+                 //   JOptionPane.showMessageDialog(null, p.ExtraerEdad());
 
                 
                

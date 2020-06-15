@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.comuna_region;
 
 /**
  *
@@ -445,6 +446,115 @@ public class controlador {
     }
          return lista;
     
+}
+        
+        public ArrayList Buscar_com(String nombre_cr){
+        ArrayList lista = new ArrayList<>();    
+        comuna_region g = null;
+        String nombre;
+        nombre = ("'"+nombre_cr+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "select nombre_comuna from COMUNA where nombre_comuna =("+nombre+")"                            
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new comuna_region(                         
+                rs.getString(1)        
+                );
+                
+            lista.add(g);   
+            }        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());}
+    catch(SQLException e){        
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));}
+    catch(Exception e){         
+        System.out.println("Error general"+e.getMessage());}
+        return lista;
+        
+}
+        public ArrayList listar_com(){
+        ArrayList lista = new ArrayList<>();    
+        comuna_region g = null;
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "select nombre_comuna from COMUNA"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new comuna_region(                         
+                rs.getString(1)        
+                );
+                
+            lista.add(g);   
+            }        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());}
+    catch(SQLException e){        
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));}
+    catch(Exception e){         
+        System.out.println("Error general"+e.getMessage());}
+        return lista;
+        
+}
+        public ArrayList Buscar_reg(String nombre_cr){
+        ArrayList lista = new ArrayList<>();    
+        comuna_region g = null;
+        String nombre;
+        nombre = ("'"+nombre_cr+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "select nombre_region from REGION where nombre_region =("+nombre+")"                            
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new comuna_region(                         
+                rs.getString(1)        
+                );
+                
+            lista.add(g);   
+            }        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());}
+    catch(SQLException e){        
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));}
+    catch(Exception e){         
+        System.out.println("Error general"+e.getMessage());}
+        return lista;
+        
+}
+        public ArrayList listar_reg(){
+        ArrayList lista = new ArrayList<>();    
+        comuna_region g = null;
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "select nombre_region from REGION"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new comuna_region(                         
+                rs.getString(1)        
+                );
+                
+            lista.add(g);   
+            }        
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());}
+    catch(SQLException e){        
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));}
+    catch(Exception e){         
+        System.out.println("Error general"+e.getMessage());}
+        return lista;
+        
 }
 }
 

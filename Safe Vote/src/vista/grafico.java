@@ -26,7 +26,7 @@ public class grafico extends javax.swing.JFrame {
      */
     public grafico() {
         initComponents();
-        HacerGrafico();
+        GraficoEdadCom();
     }
 
     /**
@@ -88,8 +88,9 @@ public class grafico extends javax.swing.JFrame {
             }
         });
     }
-            public void HacerGrafico(){
-            ArrayList<votacion> lista = crt.Grafico("Presidencial 2020");
+            public void GraficoSexCom(){
+
+            ArrayList<votacion> lista = crt.Grafico_Sex_Com("Presidencial 2020","El Bosque");
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
@@ -98,9 +99,50 @@ public class grafico extends javax.swing.JFrame {
             JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Genero", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
             ChartPanel cp = new ChartPanel(ch);
             add(cp);
-            cp.setBounds(1,40,500,400);
+            cp.setBounds(50,40,500,400);
             
         }
+            public void GraficoSexReg(){
+
+            ArrayList<votacion> lista = crt.Grafico_Sex_Reg("Presidencial 2020","Metropolitana");
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), tmp.getOpcion_voto());}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Genero", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            
+        }
+            public void GraficoEdadReg(){
+
+            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020","Metropolitana");
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), tmp.getOpcion_voto());}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Edad", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            }
+            public void GraficoEdadCom(){
+
+            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020","Metropolitana");
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), tmp.getOpcion_voto());}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Edad", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            }
+                
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

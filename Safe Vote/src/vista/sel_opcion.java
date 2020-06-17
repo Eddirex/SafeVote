@@ -135,9 +135,6 @@ public class sel_opcion extends javax.swing.JFrame {
             DefaultTableModel modelotabla=(DefaultTableModel) tblopcion.getModel();
                     controlador crt = new controlador();
             votacion v = crt.buscarOpc((String)modelotabla.getValueAt(row, 0));
-            JOptionPane.showMessageDialog(this,"call sql_insert_voto("+v.getId_opcion()+","+1+","+fecha+","+rut+")");
-
-            
             crt.GuardarVoto(v.getId_opcion(),1,fecha,rut);
 
              

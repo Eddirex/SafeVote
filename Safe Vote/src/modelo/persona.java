@@ -118,14 +118,15 @@ public class persona {
         // TODO code application logic here
     }
     
-    public int ExtraerEdad(){
+    public int ExtraerEdad(int rut){
             ResultSet rs;
             PreparedStatement stm = null;
             int edad = 0;
 
             
             try {
-                rs = stm.executeQuery("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fecha_nacimiento)), '%Y')+0 AS EDAD FROM Safe_Vote.PERSONA WHERE rut = "+rut+";");
+                rs = stm.executeQuery("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fecha_nacimiento)), '%Y')+0 AS EDAD FROM Safe_Vote.PERSONA WHERE rut = '"+rut+"';");
+                System.out.println(edad);
                 
                 while (rs.next()) {
                     edad = rs.getInt(1);

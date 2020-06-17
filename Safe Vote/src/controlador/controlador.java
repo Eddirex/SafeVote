@@ -631,7 +631,7 @@ public class controlador {
         try{
             PreparedStatement pstm = this.getConexion().obtenerConexion()
                     .prepareStatement(
-                    "call sql_cant_edad_reg("+nombre+","+nombre2+")"
+                    "call sql_cant_edad_com("+nombre+","+nombre2+")"
                     );           
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {

@@ -26,7 +26,6 @@ public class grafico extends javax.swing.JFrame {
      */
     public grafico() {
         initComponents();
-        GraficoEdadCom();
     }
 
     /**
@@ -88,9 +87,9 @@ public class grafico extends javax.swing.JFrame {
             }
         });
     }
-            public void GraficoSexCom(){
+            public void GraficoSexCom(String comuna){
 
-            ArrayList<votacion> lista = crt.Grafico_Sex_Com("Presidencial 2020","El Bosque");
+            ArrayList<votacion> lista = crt.Grafico_Sex_Com("Presidencial 2020",comuna);
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
@@ -102,9 +101,9 @@ public class grafico extends javax.swing.JFrame {
             cp.setBounds(50,40,500,400);
             
         }
-            public void GraficoSexReg(){
+            public void GraficoSexReg(String region){
 
-            ArrayList<votacion> lista = crt.Grafico_Sex_Reg("Presidencial 2020","Metropolitana");
+            ArrayList<votacion> lista = crt.Grafico_Sex_Reg("Presidencial 2020",region);
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
@@ -116,9 +115,9 @@ public class grafico extends javax.swing.JFrame {
             cp.setBounds(50,40,500,400);
             
         }
-            public void GraficoEdadReg(){
+            public void GraficoEdadReg(String region){
 
-            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020","Metropolitana");
+            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020",region);
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
@@ -129,9 +128,9 @@ public class grafico extends javax.swing.JFrame {
             add(cp);
             cp.setBounds(50,40,500,400);
             }
-            public void GraficoEdadCom(){
+            public void GraficoEdadCom(String comuna){
 
-            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020","Metropolitana");
+            ArrayList<votacion> lista = crt.Grafico_edad_Com("Presidencial 2020",comuna);
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){

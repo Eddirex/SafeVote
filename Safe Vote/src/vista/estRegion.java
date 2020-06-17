@@ -58,9 +58,19 @@ public class estRegion extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Sexo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("Edad");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Mostrar estadistica Por:");
@@ -180,6 +190,28 @@ public class estRegion extends javax.swing.JFrame {
             
         }        
     }//GEN-LAST:event_DerBarraActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int row = tblRegion.getSelectedRow();
+        if(row >=0){
+        DefaultTableModel modelotabla=(DefaultTableModel) tblRegion.getModel();
+        grafico gra = new grafico();
+        gra.setVisible(true);
+        gra.GraficoSexReg((String)modelotabla.getValueAt(row, 0));
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int row = tblRegion.getSelectedRow();
+        if(row >=0){
+        DefaultTableModel modelotabla=(DefaultTableModel) tblRegion.getModel();
+        grafico gra = new grafico();
+        gra.setVisible(true);
+        gra.GraficoEdadReg((String)modelotabla.getValueAt(row, 0));
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

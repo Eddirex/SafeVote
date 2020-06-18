@@ -169,7 +169,20 @@ public class grafico extends javax.swing.JFrame {
             add(cp);
             cp.setBounds(50,40,500,400);
             }
-                
+            public void GraficoSala(){
+
+            ArrayList<votacion> lista = crt.Grafico_sala("Presidencial 2020","1");
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), "");}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Sala", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            
+        }                
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

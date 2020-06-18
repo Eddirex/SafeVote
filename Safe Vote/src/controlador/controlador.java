@@ -731,6 +731,44 @@ public class controlador {
          return lista;
     
 }
+        public ArrayList Grafico_sala(String nombre_votacion,String num_sala){
+        ArrayList lista = new ArrayList<>();    
+        votacion g = null;
+        String nombre, nombre2,nada;
+        nada = "nada";       
+        nombre = ("'"+nombre_votacion+"'");
+        nombre2 =("'"+num_sala+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_cant_sala("+nombre+","+nombre2+")"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new votacion(
+                        
+                rs.getInt(2), 
+                rs.getString(1),
+                nada  
+      
+                );
+                
+            lista.add(g);
+   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+             }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+        }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+    }
+         return lista;
+    
+}
         //T E R M I N O     D E       G R A F I C O S by Edmundo Flores
         // S U P E R V I S O R
     public ArrayList<persona>Sala(int n_sala){

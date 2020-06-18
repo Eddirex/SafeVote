@@ -247,7 +247,7 @@ public class agregar_super extends javax.swing.JFrame {
         if(!campo.isEmpty()){
         where = "WHERE rut = '" + campo + "'";
         }else{
-        JOptionPane.showMessageDialog(null,"Error no se ha encontradoel rut ingresado,Desplegaremos todos los supervisores ");
+        JOptionPane.showMessageDialog(null,"Error no se ha encontrado el rut ingresado, Desplegaremos todos los rut disponibles ");
         
         
         }

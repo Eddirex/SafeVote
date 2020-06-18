@@ -315,9 +315,8 @@ public class controlador {
             Connection bd = conexion.obtenerConexion();
             Statement stmt = bd.createStatement();
             String query = "INSERT INTO ENCARGADO " +
-                            "(id_cargo, rut, nombre_p, id_sala) " +
-                            "VALUES (" + 
-                            "" + rut + "," +
+                            "(rut, nombre_p, id_sala) " +
+                            "VALUES (" + rut + "," +
                             "'" + nombre + "'," +
                             "" + salaId  +
                             ")";

@@ -731,6 +731,91 @@ public class controlador {
          return lista;
     
 }
+        //T E R M I N O     D E       G R A F I C O S by Edmundo Flores
+        // S U P E R V I S O R
+    public ArrayList<persona>Sala(int n_sala){
+        ArrayList lista = new ArrayList<>();    
+        persona v = null;
+        String nombre;
+        nombre = ("'"+n_sala+"'");
+        int id_opc;
+        String opcion;
+        id_opc = 1;
+        opcion = "null";
+        
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_sala("+nombre+")"
+                    );
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                v = new persona(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getDate(5),
+                1,
+                rs.getString(6),
+                opcion        
+                );                
+            lista.add(v);   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());    
+    }
+         return lista;   
+}
+    public ArrayList<persona>Sala_rut(String rut,int n_sala){
+        ArrayList lista = new ArrayList<>();    
+        persona v = null;
+        String nombre, nombre2;
+        nombre = ("'"+rut+"'");
+        nombre2 = ("'"+n_sala+"'");
+        int id_opc;
+        String opcion;
+        id_opc = 1;
+        opcion = "null";
+        
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_sala_rut("+nombre+","+nombre2+")"
+                    );
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                v = new persona(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getDate(5),
+                1,
+                rs.getString(6),
+                opcion        
+                );                
+            lista.add(v);   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());        
+     }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));    
+    }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());    
+    }
+         return lista;   
+}
 }
 
 

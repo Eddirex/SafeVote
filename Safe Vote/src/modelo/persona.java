@@ -102,6 +102,7 @@ public class persona {
         this.comuna = comuna;
     }
 
+
     @Override
     public String toString() {
         return "persona{" + "rut=" + rut + ", nombre_p=" + nombre_p + ", appaterno=" + appaterno + ", apmaterno=" + apmaterno + ", fecha_nacimiento=" + fecha_nacimiento + ", num_documento=" + num_documento + ", sexo=" + sexo + ", comuna=" + comuna + '}';

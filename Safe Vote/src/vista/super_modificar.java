@@ -8,9 +8,13 @@ package vista;
 import bd.conexion;
 import controlador.controlador;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import bd.conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,14 +22,16 @@ import java.util.logging.Logger;
  */
 public class super_modificar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form super_modificar
-     */
+    
+    
     public super_modificar() {
         initComponents();
         this.setTitle("Modificar Supervisor");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        campo.setEditable(false);
+        campo1.setEditable(false);
+        
     }
 
     /**
@@ -47,7 +53,6 @@ public class super_modificar extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,8 +63,21 @@ public class super_modificar extends javax.swing.JFrame {
 
         jLabel3.setText("Rut del supervisor");
 
-        jLabel4.setText("Sala");
+        jLabel4.setText("Sala a modificar");
 
+        campo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo2ActionPerformed(evt);
+            }
+        });
+        campo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo2KeyTyped(evt);
+            }
+        });
+
+        campo.setCaretColor(new java.awt.Color(255, 51, 51));
+        campo.setDisabledTextColor(new java.awt.Color(255, 0, 102));
         campo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoActionPerformed(evt);
@@ -67,6 +85,11 @@ public class super_modificar extends javax.swing.JFrame {
         });
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -82,23 +105,10 @@ public class super_modificar extends javax.swing.JFrame {
             }
         });
 
-        btnBuscar.setText("buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(btnVolver)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -108,24 +118,28 @@ public class super_modificar extends javax.swing.JFrame {
                         .addGap(155, 155, 155)
                         .addComponent(btnAceptar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(campo2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(campo1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(campo2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                                .addComponent(campo1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +149,8 @@ public class super_modificar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnBuscar))
-                .addGap(16, 16, 16)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -147,7 +160,7 @@ public class super_modificar extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnVolver))
@@ -169,23 +182,53 @@ public class super_modificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
+    
         
     }//GEN-LAST:event_campoActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       String rut = campo.getText();
-       String nombre = campo1.getText();
-       String salaId = campo2.getText();
-       controlador cn = new controlador();
-       
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea modificar la sala de este supervisor?");
+        
+        if  (confirmar == JOptionPane.OK_OPTION) {
+            
+        
         try {
-            cn.editarSupervisor(Integer.parseInt(campo.getText()),Integer.parseInt(campo2.getText()));
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(super_modificar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(super_modificar.class.getName()).log(Level.SEVERE, null, ex);
+        conexion cn = new conexion();
+        Connection con = cn.obtenerConexion();
+        
+        PreparedStatement pst = con.prepareStatement("UPDATE ENCARGADO SET id_sala='"+campo2.getText()+"' WHERE rut='"+campo.getText()+"'");
+        pst.executeUpdate();    
+        JOptionPane.showMessageDialog(null, "Sala modificada exitosamente");
+        campo.setText("");
+        campo1.setText("");
+        campo2.setText("");
+        } catch (Exception e) {
+            System.out.println("El error es"+e);
         }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+        
+                }else{
+        JOptionPane.showMessageDialog(null, "La sala del supervisor no ha sido modificada");
+        
+        
+        }
+        
+
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void campo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo2ActionPerformed
+
+    private void campo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo2KeyTyped
+      char validar = evt.getKeyChar();
+            if (Character.isLetter(validar)) {
+                getToolkit().beep();
+                evt.consume();
+                
+                JOptionPane.showMessageDialog(rootPane,"Ingrese el numero de sala solamente con numeros");
+            }
+    }//GEN-LAST:event_campo2KeyTyped
 
     /**
      * @param args the command line arguments
@@ -225,11 +268,10 @@ public class super_modificar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JTextField campo;
-    private javax.swing.JTextField campo1;
+    public static javax.swing.JTextField campo;
+    public static javax.swing.JTextField campo1;
     private javax.swing.JTextField campo2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

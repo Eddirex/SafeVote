@@ -32,7 +32,8 @@ public class agregar_super extends javax.swing.JFrame {
         this.setTitle("Agregar supervisor");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        
+      
+      
     }
 
     /**
@@ -85,6 +86,11 @@ public class agregar_super extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese rut");
 
+        txtCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCampoActionPerformed(evt);
+            }
+        });
         txtCampo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCampoKeyPressed(evt);
@@ -240,6 +246,10 @@ public class agregar_super extends javax.swing.JFrame {
         
         if(!campo.isEmpty()){
         where = "WHERE rut = '" + campo + "'";
+        }else{
+        JOptionPane.showMessageDialog(null,"Error no se ha encontradoel rut ingresado,Desplegaremos todos los supervisores ");
+        
+        
         }
         
         
@@ -310,6 +320,7 @@ public class agregar_super extends javax.swing.JFrame {
         
             String mensaje = control.agregarSupervisor(rut, nombre, Integer.parseInt(salaId));
             JOptionPane.showMessageDialog(this, mensaje);
+           
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -352,6 +363,10 @@ public class agregar_super extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane,"Ingrese la sala con numeros");
     }//GEN-LAST:event_txtSalaKeyTyped
     }
+    private void txtCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCampoActionPerformed
+    
     /**
      * @param args the command line arguments
      */

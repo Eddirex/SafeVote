@@ -7,6 +7,7 @@ package vista;
 
 import bd.conexion;
 import com.sun.javafx.scene.control.skin.TooltipSkin;
+import com.sun.jmx.mbeanserver.Util;
 import controlador.controlador;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -56,7 +57,7 @@ public class super_mode extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        tabla1 = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -99,7 +100,7 @@ public class super_mode extends javax.swing.JFrame {
             }
         });
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -110,14 +111,21 @@ public class super_mode extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(tabla);
+        jScrollPane1.setViewportView(tabla1);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,36 +145,35 @@ public class super_mode extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(38, 38, 38))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btnEliminar)
-                            .addGap(155, 155, 155)
-                            .addComponent(jButton3)
-                            .addGap(48, 48, 48)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVolver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
-                        .addGap(21, 21, 21))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,11 +187,11 @@ public class super_mode extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(jButton3))
-                .addGap(65, 65, 65)
+                    .addComponent(jButton3)
+                    .addComponent(btnEliminar))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
                     .addComponent(btnAgregar))
@@ -213,10 +220,10 @@ public class super_mode extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
     
-   int confirmar = JOptionPane.showConfirmDialog(null, "¿Esat seguro que desea eliminar a este supervisor?");
-   int fila = tabla.getSelectedRow();
+   int confirmar = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar a este supervisor?");
+   int fila = tabla1.getSelectedRow();
    String valor ="";
-   valor = tabla.getValueAt(fila,0).toString();
+   valor = tabla1.getValueAt(fila,0).toString();
    
         if (confirmar == JOptionPane.OK_OPTION) {
             
@@ -231,7 +238,7 @@ public class super_mode extends javax.swing.JFrame {
            ps.clearParameters();
            JOptionPane.showMessageDialog(null,"Supervisor eliminado correctamente");
            
-           DefaultTableModel dtm = (DefaultTableModel) this.tabla.getModel();
+           DefaultTableModel dtm = (DefaultTableModel) this.tabla1.getModel();
            txtRut.setText(null);
            dtm.setColumnCount(0);
            dtm.setRowCount(0);
@@ -262,11 +269,12 @@ public class super_mode extends javax.swing.JFrame {
             
             
             where = "WHERE rut = '" + campo + "'";
+        }
 
         try{
         
         DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
+        tabla1.setModel(modelo);
             
             PreparedStatement ps  = null;
             ResultSet rs = null;
@@ -309,12 +317,11 @@ public class super_mode extends javax.swing.JFrame {
         }   catch (ClassNotFoundException ex) { 
                 Logger.getLogger(super_mode.class.getName()).log(Level.SEVERE, null, ex);
             } 
-        }else{
-        JOptionPane.showMessageDialog(null, "No se ha encontrado a ningun supervisor");
         
         
         
-        }
+        
+        
                                      
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -336,9 +343,22 @@ public class super_mode extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     super_modificar sm = new super_modificar();
     sm.setVisible(true);
-    this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    this.dispose();
+    
+    
+    DefaultTableModel df = (DefaultTableModel) this.tabla1.getModel();
+    int rut = (int)   df.getValueAt(this.tabla1.getSelectedRow(), 0);
+    String nombre = (String) df.getValueAt(this.tabla1.getSelectedRow(), 1);
+    
+    super_modificar.campo.setText(String.valueOf(rut));
+    super_modificar.campo1.setText(nombre);
 
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -386,7 +406,7 @@ public class super_mode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla;
+    private javax.swing.JTable tabla1;
     private javax.swing.JTextField txtRut;
     // End of variables declaration//GEN-END:variables
 }

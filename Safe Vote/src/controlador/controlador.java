@@ -317,7 +317,6 @@ public class controlador {
             String query = "INSERT INTO ENCARGADO " +
                             "(id_cargo, rut, nombre_p, id_sala) " +
                             "VALUES (" + 
-                            "2," +
                             "" + rut + "," +
                             "'" + nombre + "'," +
                             "" + salaId  +

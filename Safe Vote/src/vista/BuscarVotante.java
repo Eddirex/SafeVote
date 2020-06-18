@@ -40,6 +40,7 @@ public class BuscarVotante extends javax.swing.JFrame {
         DerBarra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblComuna = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +74,13 @@ public class BuscarVotante extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblComuna);
 
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,6 +97,10 @@ public class BuscarVotante extends javax.swing.JFrame {
                         .addComponent(DerBarra)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +112,9 @@ public class BuscarVotante extends javax.swing.JFrame {
                     .addComponent(DerBarra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,6 +135,12 @@ public class BuscarVotante extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_DerBarraActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Supervisor sv = new Supervisor();
+        sv.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +227,7 @@ public class BuscarVotante extends javax.swing.JFrame {
     private javax.swing.JTextField BarraBuscadora;
     private javax.swing.JButton DerBarra;
     private javax.swing.JLabel IzqBarra;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblComuna;
     // End of variables declaration//GEN-END:variables

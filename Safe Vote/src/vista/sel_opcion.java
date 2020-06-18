@@ -137,6 +137,8 @@ public class sel_opcion extends javax.swing.JFrame {
             votacion v = crt.buscarOpc((String)modelotabla.getValueAt(row, 0));
             crt.GuardarVoto(v.getId_opcion(),1,fecha,rut);
             
+            JOptionPane.showMessageDialog(this, "!Gracias por votar con Safe Vote!");
+            
 
              
         }else{

@@ -164,6 +164,7 @@ public class login extends javax.swing.JFrame {
 
                     sel_votacion Ag = new sel_votacion();
                     Ag.setVisible(true);
+                    Ag.rut=p.getRut();
                     
                 //}
                 

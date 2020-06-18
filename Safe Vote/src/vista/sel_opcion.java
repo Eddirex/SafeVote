@@ -133,9 +133,10 @@ public class sel_opcion extends javax.swing.JFrame {
         int opc = JOptionPane.showConfirmDialog(this,"¿Esta seguro de su eleccion?","Pregunta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(opc==JOptionPane.YES_OPTION){
             DefaultTableModel modelotabla=(DefaultTableModel) tblopcion.getModel();
-                    controlador crt = new controlador();
+            controlador crt = new controlador();
             votacion v = crt.buscarOpc((String)modelotabla.getValueAt(row, 0));
             crt.GuardarVoto(v.getId_opcion(),1,fecha,rut);
+            
 
              
         }else{

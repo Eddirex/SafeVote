@@ -549,6 +549,115 @@ public class controlador {
          return lista;
     
 }
+
+        public ArrayList Grafico_Sex_Reg(String nombre_votacion,String nombre_region){
+        ArrayList lista = new ArrayList<>();    
+        votacion g = null;
+        String nombre, nombre2;
+        nombre = ("'"+nombre_votacion+"'");
+        nombre2 =("'"+nombre_region+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_cant_sex_reg("+nombre+","+nombre2+")"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new votacion(
+                        
+                rs.getInt(2), 
+                rs.getString(1),
+                rs.getString(3)         
+                );
+                
+            lista.add(g);
+   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+             }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+        }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+    }
+         return lista;
+    
+}
+        public ArrayList Grafico_Sex_Gen(String nombre_votacion){
+        ArrayList lista = new ArrayList<>();    
+        votacion g = null;
+        String nombre;
+        nombre = ("'"+nombre_votacion+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_cant_sexo("+nombre+")"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new votacion(
+                        
+                rs.getInt(2), 
+                rs.getString(1),
+                rs.getString(3)         
+                );
+                
+            lista.add(g);
+   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+             }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+        }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+    }
+         return lista;
+    
+}
+        public ArrayList Grafico_edad_Com(String nombre_votacion,String nombre_region){
+        ArrayList lista = new ArrayList<>();    
+        votacion g = null;
+        String nombre, nombre2;
+        nombre = ("'"+nombre_votacion+"'");
+        nombre2 =("'"+nombre_region+"'");
+        try{
+            PreparedStatement pstm = this.getConexion().obtenerConexion()
+                    .prepareStatement(
+                    "call sql_cant_edad_com("+nombre+","+nombre2+")"
+                    );           
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                g = new votacion(
+                        
+                rs.getInt(3), 
+                rs.getString(2),
+                rs.getString(1)  
+      
+                );
+                
+            lista.add(g);
+   
+            }       
+        }
+    catch(ClassNotFoundException e){
+        System.out.println("Clase no encontrada"+e.getMessage());
+             }
+    catch(SQLException e){
+        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
+        }
+     catch(Exception e){
+        System.out.println("Error general"+e.getMessage());
+    }
+         return lista;
+    
+}
         public ArrayList Grafico_edad_Reg(String nombre_votacion,String nombre_region){
         ArrayList lista = new ArrayList<>();    
         votacion g = null;
@@ -586,52 +695,15 @@ public class controlador {
          return lista;
     
 }
-        public ArrayList Grafico_Sex_Reg(String nombre_votacion,String nombre_region){
+        public ArrayList Grafico_edad_Gen(String nombre_votacion){
         ArrayList lista = new ArrayList<>();    
         votacion g = null;
-        String nombre, nombre2;
+        String nombre;
         nombre = ("'"+nombre_votacion+"'");
-        nombre2 =("'"+nombre_region+"'");
         try{
             PreparedStatement pstm = this.getConexion().obtenerConexion()
                     .prepareStatement(
-                    "call sql_cant_sex_reg("+nombre+","+nombre2+")"
-                    );           
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                g = new votacion(
-                        
-                rs.getInt(2), 
-                rs.getString(1),
-                rs.getString(3)         
-                );
-                
-            lista.add(g);
-   
-            }       
-        }
-    catch(ClassNotFoundException e){
-        System.out.println("Clase no encontrada"+e.getMessage());
-             }
-    catch(SQLException e){
-        System.out.println(String.format("Error de SQL mensaje %s y codigo %s ",e.getMessage(),e.getSQLState()));
-        }
-     catch(Exception e){
-        System.out.println("Error general"+e.getMessage());
-    }
-         return lista;
-    
-}
-        public ArrayList Grafico_edad_Com(String nombre_votacion,String nombre_region){
-        ArrayList lista = new ArrayList<>();    
-        votacion g = null;
-        String nombre, nombre2;
-        nombre = ("'"+nombre_votacion+"'");
-        nombre2 =("'"+nombre_region+"'");
-        try{
-            PreparedStatement pstm = this.getConexion().obtenerConexion()
-                    .prepareStatement(
-                    "call sql_cant_edad_com("+nombre+","+nombre2+")"
+                    "call sql_cant_edad("+nombre+")"
                     );           
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {

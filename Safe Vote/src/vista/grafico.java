@@ -115,9 +115,23 @@ public class grafico extends javax.swing.JFrame {
             cp.setBounds(50,40,500,400);
             
         }
-            public void GraficoEdadReg(String region){
+            public void GraficoSexGen(){
 
-            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020",region);
+            ArrayList<votacion> lista = crt.Grafico_Sex_Gen("Presidencial 2020");
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), tmp.getOpcion_voto());}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Genero", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            
+        }
+            public void GraficoEdadCom(String comuna){
+
+            ArrayList<votacion> lista = crt.Grafico_edad_Com("Presidencial 2020",comuna);
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
@@ -128,9 +142,23 @@ public class grafico extends javax.swing.JFrame {
             add(cp);
             cp.setBounds(50,40,500,400);
             }
-            public void GraficoEdadCom(String comuna){
+            
+            public void GraficoEdadReg(String comuna){
 
-            ArrayList<votacion> lista = crt.Grafico_edad_Com("Presidencial 2020",comuna);
+            ArrayList<votacion> lista = crt.Grafico_edad_Reg("Presidencial 2020",comuna);
+            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+            
+            for(votacion tmp : lista){
+            dtsc.setValue(tmp.getId_opcion(), tmp.getNombre_votacion(), tmp.getOpcion_voto());}
+            
+            JFreeChart ch = ChartFactory.createBarChart("Grafico de votos", "Edad", "Cantidad", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel cp = new ChartPanel(ch);
+            add(cp);
+            cp.setBounds(50,40,500,400);
+            }
+            public void GraficoEdadGen(){
+
+            ArrayList<votacion> lista = crt.Grafico_edad_Gen("Presidencial 2020");
             DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
             
             for(votacion tmp : lista){
